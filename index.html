@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A simple check for your skins in agar">
+        <meta name="author" content="Voakie">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script>
+            var main = function() {
+              $("input.color").val("#ffffff");
+              $(".submit").click(function() {
+                $(".curr").remove();
+                var skin = $("input.url").val();
+                var name = $("input.name").val();
+                var color = $("input.color").val();
+                var ccolor = $("input.ccolor").val();
+                var preview = "<div class='preview'><h3>Preview:</h3><div class='skin' style='background-image: url(" + skin + "); background-color:" + ccolor + "'><h3 class='name' style='color: " + color + "'>" + name + "</h3></div></div>"
+                $("body").append("<div class='curr'><p><b>Current skin</b>:</p><br><p>" + skin + "</p><br><p>Cell size: </p><input class='size' type='range' min='100' max='700'>" + preview + "</div>");
+                setInterval(function() {
+                  var size = $("input.size").val();
+                  $(".skin").css({
+                    "height":size,
+                    "width":size,
+                  });
+                }, 100);
+                if ($("#border").prop("checked") === true) {
+                  $(".skin").css({
+                    "border":"2px solid black"
+                  });
+                };
+              });
+            };
+
+            $(document).ready(main);
+        </script>
+        <title>VOAKIE - Skincheck</title>
+    </head>
+    <body>
+
+        <style>
+            * {
+              font-family: "Ubuntu", sans-serif
+            }
+
+            .skin {
+              height: 200px;
+              width: 200px;
+              border-radius: 50%;
+              background-size: 100%;
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+
+            .skin {
+              position: absolute;
+            }
+
+            p {
+              display: inline-block;
+            }
+
+            h3.name {
+              position: absolute;
+              margin: auto;
+              height: 40px;
+              width: 100%;
+              top: 0;
+              bottom: 0;
+              text-align: center;
+              text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+              font-size: 40px;
+            }
+
+            input {
+              margin-left: 1em;
+            }
+        </style>
+
+        <h1>Agar.io Skin Checker</h1>
+        <p><i>by <b>Voakie</b></i></p>
+        <hr>
+        <p>1. Skin URL: </p>
+        <input type='url' placeholder='http://myskin.com/' class='url'><br>
+        <p>2. Cell name: </p>
+        <input type='text' placeholder='Name' class='name'><br>
+        <p>3. Name color: </p>
+        <input type='color' class='color' value='#ffffff'><br>
+        <p>4. Cell color: </p>
+        <input type='color' class='ccolor' value='#ff0000'><br>
+        <label for="border">Show border?:</label>
+        <input type="checkbox" id="border" checked><br><br>
+        <button class='submit'>Submit</button>
+
+    </body>
+</html>
